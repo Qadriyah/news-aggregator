@@ -11,3 +11,14 @@ export type Article = {
   publishedAt: string;
   content: string;
 };
+
+export type SearchParams = {
+  q: string;
+};
+
+export type Response = {
+  status: string;
+  totalResults: number;
+  articles: Article[];
+  error?: string;
+};

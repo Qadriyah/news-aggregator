@@ -1,10 +1,18 @@
-import ArticleItem from "../components/ArticleItem/ArticleItem";
+import { Suspense } from "react";
+import ArticleList from "../components/Article/ArticleList";
 import Button from "../components/Button/Button";
 import Select, { Option } from "../components/Select/Select";
-import articles from "../data/articles.json";
+import ArticleListSkeleton from "../components/skeletons/ArticleListSkeleton";
 import dateOptions from "../data/dateOptions.json";
+import { get } from "../http/fetch";
+import { Response } from "../types/entities";
+
+const NEWS_API = process.env.REACT_APP_NEWS_API;
+const NEWS_API_KEY = process.env.REACT_APP_NEWS_API_KEY;
 
 const Home = () => {
+  const res = get<Response>(`${NEWS_API}?q=bitcoin&apiKey=${NEWS_API_KEY}`);
+
   return (
     <div className="content-wrapper">
       <p>Filter result</p>
@@ -31,11 +39,9 @@ const Home = () => {
         </Select>
         <Button>Clear filters</Button>
       </div>
-      <div className="articles">
-        {articles.map((article, index) => (
-          <ArticleItem key={index} article={article} />
-        ))}
-      </div>
+      <Suspense fallback={<ArticleListSkeleton />}>
+        <ArticleList resPromise={res} />
+      </Suspense>
     </div>
   );
 };

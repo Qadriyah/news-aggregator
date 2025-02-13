@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { Article } from "../../types/entities";
 import { timeSince } from "../../utils/helpers";
-import "./article.css";
+import "./articleItem.css";
 
 type IProps = {
   article: Article;
