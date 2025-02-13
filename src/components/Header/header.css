@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #ffffff;
+  padding: 20px 200px 20px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  border-bottom: solid 1px var(--lighter-bg-color);
+  background-color: var(--main-bg-color);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+@media (min-width: 480px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    width: calc(100vw - 4vw);
+  }
+}

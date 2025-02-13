@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "ES2020",
+    "noImplicitAny": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["**/*.spec.tsx", "**/*.test.tsx", "node_modules", "build"]
+}
