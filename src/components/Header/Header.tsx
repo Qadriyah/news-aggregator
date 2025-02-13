@@ -6,7 +6,7 @@ const Header = () => {
     <header className="header">
       <div className="logo">Innoscripta News</div>
       <div style={{ display: "flex" }}>
-        <Search searchParam="" placeholder="Search by keyword" />
+        <Search searchParam="q" name="q" placeholder="Search by keyword" />
       </div>
     </header>
   );
