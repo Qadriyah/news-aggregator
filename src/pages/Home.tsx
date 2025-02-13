@@ -1,4 +1,5 @@
-import { Suspense } from "react";
+import React, { Suspense } from "react";
+import { useSearchParams } from "react-router";
 import ArticleList from "../components/Article/ArticleList";
 import Button from "../components/Button/Button";
 import Select, { Option } from "../components/Select/Select";
@@ -11,7 +12,17 @@ const NEWS_API = process.env.REACT_APP_NEWS_API;
 const NEWS_API_KEY = process.env.REACT_APP_NEWS_API_KEY;
 
 const Home = () => {
-  const res = get<Response>(`${NEWS_API}?q=bitcoin&apiKey=${NEWS_API_KEY}`);
+  const [searchParams] = useSearchParams();
+  const [resPromise, setResPromise] = React.useState<Promise<Response>>(
+    new Promise((resolve) => resolve(null))
+  );
+
+  React.useEffect(() => {
+    const res = get<Response>(
+      `${NEWS_API}?q=${searchParams.get("q")}&apiKey=${NEWS_API_KEY}`
+    );
+    setResPromise(res);
+  }, [searchParams]);
 
   return (
     <div className="content-wrapper">
@@ -40,7 +51,7 @@ const Home = () => {
         <Button>Clear filters</Button>
       </div>
       <Suspense fallback={<ArticleListSkeleton />}>
-        <ArticleList resPromise={res} />
+        <ArticleList resPromise={resPromise} />
       </Suspense>
     </div>
   );
