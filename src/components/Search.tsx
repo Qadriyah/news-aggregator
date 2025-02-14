@@ -7,9 +7,8 @@ import {
   useTransition,
 } from "react";
 import { useNavigate, useSearchParams } from "react-router";
-import Spinner from "../Spinner";
 import SearchIcon from "./SearchIcon";
-import "./search.css";
+import Spinner from "./Spinner";
 
 type IProps = InputHTMLAttributes<HTMLInputElement> & {
   searchParam: string;
@@ -35,7 +34,7 @@ const Search = ({ searchParam, ...props }: IProps) => {
   );
 
   return (
-    <div className="search-input-container">
+    <div className="input-container">
       {isPending ? (
         <Spinner />
       ) : (
