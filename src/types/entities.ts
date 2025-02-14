@@ -10,6 +10,7 @@ export type Article = {
   urlToImage: string;
   publishedAt: string;
   content: string;
+  category: string;
 };
 
 export type SearchParams = {
