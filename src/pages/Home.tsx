@@ -1,10 +1,8 @@
 import React, { Suspense } from "react";
 import { useSearchParams } from "react-router";
 import ArticleList from "../components/Article/ArticleList";
-import Button from "../components/Button/Button";
-import Select, { Option } from "../components/Select/Select";
+import Filters from "../components/Filters/Filters";
 import ArticleListSkeleton from "../components/skeletons/ArticleListSkeleton";
-import dateOptions from "../data/dateOptions.json";
 import { get } from "../http/fetch";
 import { Response } from "../types/entities";
 
@@ -17,39 +15,17 @@ const Home = () => {
     new Promise((resolve) => resolve(null))
   );
 
+  const query = searchParams.get("q");
+
   React.useEffect(() => {
-    const res = get<Response>(
-      `${NEWS_API}?q=${searchParams.get("q")}&apiKey=${NEWS_API_KEY}`
-    );
+    const res = get<Response>(`${NEWS_API}?q=${query}&apiKey=${NEWS_API_KEY}`);
     setResPromise(res);
-  }, [searchParams]);
+  }, [query]);
 
   return (
     <div className="content-wrapper">
       <p>Filter result</p>
-      <div className="filters">
-        <Select>
-          {dateOptions.map((option) => (
-            <Option key={option.value} value={option.value}>
-              {option.label}
-            </Option>
-          ))}
-        </Select>
-        <Select>
-          <Option value="Any time">Any category</Option>
-          <Option value="Any time">Category 1</Option>
-          <Option value="Past hour">Category 2</Option>
-          <Option value="Past 24 hours">Category 3</Option>
-        </Select>
-        <Select>
-          <Option value="Any time">Any source</Option>
-          <Option value="Any time">Source 1</Option>
-          <Option value="Past hour">Source 2</Option>
-          <Option value="Past 24 hours">Source 3</Option>
-          <Option value="Past week">Source 4</Option>
-        </Select>
-        <Button>Clear filters</Button>
-      </div>
+      <Filters />
       <Suspense fallback={<ArticleListSkeleton />}>
         <ArticleList resPromise={resPromise} />
       </Suspense>

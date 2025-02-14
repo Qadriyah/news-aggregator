@@ -24,3 +24,20 @@ export const timeSince = (date: string) => {
     }
   }
 };
+
+export const getPastDate = (past: string) => {
+  const currentDate = new Date();
+  const dateMap: Record<string, () => void> = {
+    PastHour: () => currentDate.setTime(currentDate.getTime() - 60 * 60 * 1000),
+    Past24: () => currentDate.setDate(currentDate.getDate() - 1),
+    PastWeek: () => currentDate.setDate(currentDate.getDate() - 7),
+    PastMonth: () => currentDate.setDate(currentDate.getDate() - 30),
+    PastYear: () => currentDate.setDate(currentDate.getDate() - 365),
+  };
+  if (!dateMap[past]) {
+    return null;
+  }
+
+  dateMap[past]();
+  return currentDate;
+};
