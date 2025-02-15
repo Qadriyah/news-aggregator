@@ -12,9 +12,6 @@ const NEWS_API_KEY = process.env.REACT_APP_NEWS_API_KEY;
 const NEW_YORK_TIMES_API = process.env.REACT_APP_NEW_YORK_TIMES_API;
 const NEW_YORK_TIMES_API_KEY = process.env.REACT_APP_NEW_YORK_TIMES_API_KEY;
 
-const GUARDIAN_API = process.env.REACT_APP_GUARDIAN_API;
-const GUARDIAN_API_KEY = process.env.REACT_APP_GUARDIAN_API_KEY;
-
 const Home = () => {
   const [searchParams] = useSearchParams();
   const [resPromise, setResPromise] = React.useState<
@@ -28,9 +25,6 @@ const Home = () => {
       get<BaseResponse>(`${NEWS_API}?q=${query}&apiKey=${NEWS_API_KEY}`),
       get<BaseResponse>(
         `${NEW_YORK_TIMES_API}?q=${query}&api-key=${NEW_YORK_TIMES_API_KEY}`
-      ),
-      get<BaseResponse>(
-        `${GUARDIAN_API}?q=${query}&api-key=${GUARDIAN_API_KEY}`
       ),
     ]);
     setResPromise(res);

@@ -17,8 +17,7 @@ const ArticleList = ({ resPromise }: IProps) => {
     input: PromiseSettledResult<T>
   ): input is PromiseFulfilledResult<T> => input.status === "fulfilled";
 
-  const [res1, res2, res3] = results.filter(isFulfilled);
-  console.log(res3);
+  const [res1, res2] = results.filter(isFulfilled);
   let articles = res1.value.articles;
   articles = articles?.concat(
     res2.value.response.docs.map((el) => ({

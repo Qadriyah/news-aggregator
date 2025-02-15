@@ -1,46 +1,73 @@
-# Getting Started with Create React App
+# News Aggregator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+News aggregator website that pulls articles from different sources and displays them in a clean, easy-to-read format.
 
-## Available Scripts
+## Table of contents
 
-In the project directory, you can run:
+- [Tools](#tools)
+- [Setup](#setup)
+- [To install dependencies run](#to-install-dependencies-run)
+- [Set environment variables](#set-environment-variables)
+- [Starting local development server](#starting-local-development-server)
 
-### `npm start`
+## Tools
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [Node](https://nodejs.org/docs/latest/api/) - A Javascript runtime environment.
+- [React](https://react.dev/reference/react) - A Javascript library for building user interfaces.
+- [NPM](https://www.npmjs.com/) - A package manager
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Setup
 
-### `npm test`
+Clone the repository:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+git clone https://github.com/Qadriyah/news-aggregator.git
+```
 
-### `npm run build`
+Then change to project directory:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+cd news-aggregator
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Set environment variables
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Be sure to set the environment variables shown in the `.env.example` file
 
-### `npm run eject`
+### Starting local development server
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### With docker
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+docker build -t  news-aggregator .
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+This command tags the image with the name `news-aggregator` and specifies the build context as current directory and builds the app using the `Dockerfile`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+docker run -p 3000:3000 news-aggregator
+```
 
-## Learn More
+This command will run the app inside a docker container and expose port 3000
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Without docker
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### To install dependencies run:
+
+```
+npm install --force
+```
+
+This will install all the dependencies defined in the `package.json` file inside the news-aggregator folder.
+
+#### To start the development serer
+
+```
+npm start
+```
+
+After starting the local development server, the application can be accessed at:
+
+```
+http://localhost:3000
+```

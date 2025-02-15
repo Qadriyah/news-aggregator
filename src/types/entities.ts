@@ -13,6 +13,20 @@ export type Article = {
   category: string;
 };
 
+export type NewYorkTimesArticle = {
+  abstract: string;
+  byline: {
+    original: string;
+  };
+  pub_date: string;
+  source: string;
+  web_url: string;
+  lead_paragraph: string;
+  multimedia: Array<{
+    url: string;
+  }>;
+};
+
 export type BaseResponse = {
   status: string;
   articles: Article[];
@@ -20,18 +34,6 @@ export type BaseResponse = {
   error?: string;
   copyright: string;
   response: {
-    docs: Array<{
-      abstract: string;
-      byline: {
-        original: string;
-      };
-      pub_date: string;
-      source: string;
-      web_url: string;
-      lead_paragraph: string;
-      multimedia: Array<{
-        url: string;
-      }>;
-    }>;
+    docs: NewYorkTimesArticle[];
   };
 };
