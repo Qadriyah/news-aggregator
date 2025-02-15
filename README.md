@@ -6,6 +6,7 @@ News aggregator website that pulls articles from different sources and displays 
 
 - [Tools](#tools)
 - [Setup](#setup)
+- [Running tests](#running-tests)
 - [Starting local development server](#starting-local-development-server)
 
 ## Tools
@@ -31,6 +32,14 @@ cd news-aggregator
 ### Set environment variables
 
 Be sure to set the environment variables shown in the `.env.example` file
+
+## Running tests
+
+```
+npm run cy:open
+```
+
+This command will open a cypress app in a test runner
 
 ## Starting local development server
 

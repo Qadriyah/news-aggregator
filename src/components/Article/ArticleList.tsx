@@ -100,7 +100,7 @@ const ArticleList = ({ resPromise }: IProps) => {
   ]);
 
   return (
-    <div className="articles">
+    <div className="articles" data-test="article-list">
       {filteredArticles.length > 0 ? (
         filteredArticles.map((article, index) => (
           <ArticleItem key={index} article={article} />
