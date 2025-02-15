@@ -53,7 +53,6 @@ const Filters = () => {
       <Input
         placeholder="source1,source2"
         id="source"
-        list="sources"
         onChange={handleChange}
         value={searchParams.get("source") || ""}
       />
@@ -63,7 +62,9 @@ const Filters = () => {
         onChange={handleChange}
         value={searchParams.get("author") || ""}
       />
-      <Button onClick={clearFilters}>Clear filters</Button>
+      <Button id="clear" onClick={clearFilters}>
+        Clear filters
+      </Button>
     </div>
   );
 };

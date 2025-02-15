@@ -4,9 +4,16 @@ import "./header.css";
 const Header = () => {
   return (
     <header className="header">
-      <div className="logo">Innoscripta News</div>
+      <div className="logo" data-test="company-name">
+        Innoscripta News
+      </div>
       <div style={{ display: "flex" }}>
-        <Search searchParam="q" name="q" placeholder="Search by keyword" />
+        <Search
+          searchParam="q"
+          name="q"
+          id="q"
+          placeholder="Search by keyword"
+        />
       </div>
     </header>
   );

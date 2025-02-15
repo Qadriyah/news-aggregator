@@ -6,6 +6,7 @@ News aggregator website that pulls articles from different sources and displays 
 
 - [Tools](#tools)
 - [Setup](#setup)
+- [Running tests](#running-tests)
 - [Starting local development server](#starting-local-development-server)
 
 ## Tools
@@ -32,6 +33,14 @@ cd news-aggregator
 
 Be sure to set the environment variables shown in the `.env.example` file
 
+## Running tests
+
+```
+npm run cy:open
+```
+
+This command will open a cypress app in a test runner
+
 ## Starting local development server
 
 ### With docker
@@ -43,7 +52,7 @@ docker build -t  news-aggregator .
 This command tags the image with the name `news-aggregator` and specifies the build context as current directory and builds the app using the `Dockerfile`
 
 ```
-docker run -p 3000:3000 news-aggregator
+docker run --env-file .env -p 3000:3000 news-aggregator
 ```
 
 This command will run the app inside a docker container and expose port 3000
