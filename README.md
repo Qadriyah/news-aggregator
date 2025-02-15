@@ -43,7 +43,7 @@ docker build -t  news-aggregator .
 This command tags the image with the name `news-aggregator` and specifies the build context as current directory and builds the app using the `Dockerfile`
 
 ```
-docker run -p 3000:3000 news-aggregator
+docker run --env-file .env -p 3000:3000 news-aggregator
 ```
 
 This command will run the app inside a docker container and expose port 3000
