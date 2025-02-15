@@ -36,86 +36,78 @@ const ArticleList = ({ resPromise }: IProps) => {
     }))
   );
 
-  const dateParam = searchParams.get("date");
-  const sourceParam = searchParams.get("source");
-  const categoryParam = searchParams.get("category");
-  const authorParam = searchParams.get("author");
+  const filterParams: Record<string, string> = React.useMemo(
+    () => ({
+      date: searchParams.get("date"),
+      source: searchParams.get("source"),
+      category: searchParams.get("category"),
+      author: searchParams.get("author"),
+    }),
+    [searchParams]
+  );
 
   const filterByDate = React.useCallback(
     (data: Article[]) =>
       data.filter((article) => {
-        const pastDate = getPastDate(dateParam);
+        const pastDate = getPastDate(filterParams.date);
         const currentDate = new Date();
         const publishedAt = new Date(article.publishedAt);
         return publishedAt <= currentDate && publishedAt >= pastDate;
       }),
-    [dateParam]
+    [filterParams.date]
   );
 
-  const filterBySource = React.useCallback(
-    (data: Article[]) =>
-      data.filter((article) => {
-        const sources = sourceParam.split(",").filter((el) => el !== "");
+  const filterResult = React.useCallback(
+    (data: Article[], q: "source" | "category" | "author") =>
+      data.filter((articlle) => {
+        const filterOptions = filterParams[q]
+          .split(",")
+          .filter((el) => el !== "");
 
-        return sources.some((el) =>
-          article.source?.name?.toLowerCase()?.includes(el.toLowerCase())
+        return filterOptions.some((el) =>
+          q === "source"
+            ? articlle[q]?.name?.toLowerCase()?.includes(el.toLowerCase())
+            : articlle[q]?.toString()?.toLowerCase()?.includes(el.toLowerCase())
         );
       }),
-    [sourceParam]
-  );
-
-  const filterByCategory = React.useCallback(
-    (data: Article[]) =>
-      data.filter((article) => {
-        const categories = categoryParam.split(",").filter((el) => el !== "");
-
-        return categories.some((el) =>
-          article.category?.toLowerCase()?.includes(el.toLowerCase())
-        );
-      }),
-    [categoryParam]
-  );
-
-  const filterByAuthor = React.useCallback(
-    (data: Article[]) =>
-      data.filter((article) => {
-        const authors = authorParam.split(",").filter((el) => el !== "");
-
-        return authors.some((el) =>
-          article.author?.toLowerCase()?.includes(el.toLowerCase())
-        );
-      }),
-    [authorParam]
+    [filterParams]
   );
 
   const filteredArticles = React.useMemo(() => {
     let data = [...articles];
-    if (!dateParam && !sourceParam && !categoryParam && !authorParam)
+    if (
+      !filterParams.date &&
+      !filterParams.source &&
+      !filterParams.category &&
+      !filterParams.author
+    )
       return articles;
 
-    if (dateParam) data = filterByDate(data);
-    if (sourceParam) data = filterBySource(data);
-    if (categoryParam) data = filterByCategory(data);
-    if (authorParam) data = filterByAuthor(data);
+    if (filterParams.date) data = filterByDate(data);
+    if (filterParams.source) data = filterResult(data, "source");
+    if (filterParams.category) data = filterResult(data, "category");
+    if (filterParams.author) data = filterResult(data, "author");
 
     return data;
   }, [
     articles,
-    authorParam,
-    categoryParam,
-    dateParam,
-    filterByAuthor,
-    filterByCategory,
     filterByDate,
-    filterBySource,
-    sourceParam,
+    filterParams.author,
+    filterParams.category,
+    filterParams.date,
+    filterParams.source,
+    filterResult,
   ]);
 
   return (
     <div className="articles">
-      {filteredArticles.map((article, index) => (
-        <ArticleItem key={index} article={article} />
-      ))}
+      {filteredArticles.length > 0 ? (
+        filteredArticles.map((article, index) => (
+          <ArticleItem key={index} article={article} />
+        ))
+      ) : (
+        <div>There are no articles to display</div>
+      )}
     </div>
   );
 };
