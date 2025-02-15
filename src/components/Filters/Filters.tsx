@@ -53,6 +53,7 @@ const Filters = () => {
       <Input
         placeholder="source1,source2"
         id="source"
+        list="sources"
         onChange={handleChange}
         value={searchParams.get("source") || ""}
       />
