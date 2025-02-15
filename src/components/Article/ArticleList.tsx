@@ -1,17 +1,40 @@
 import React, { use } from "react";
 import { useSearchParams } from "react-router";
-import { Article, Response } from "../../types/entities";
+import { Article, BaseResponse } from "../../types/entities";
 import { getPastDate } from "../../utils/helpers";
 import ArticleItem from "./ArticleItem";
 import "./articleList.css";
 
 type IProps = {
-  resPromise: Promise<Response>;
+  resPromise: Promise<PromiseSettledResult<BaseResponse>[]>;
 };
 
 const ArticleList = ({ resPromise }: IProps) => {
   const [searchParams] = useSearchParams();
-  const { articles } = use(resPromise);
+  const results = use(resPromise);
+
+  const isFulfilled = <T,>(
+    input: PromiseSettledResult<T>
+  ): input is PromiseFulfilledResult<T> => input.status === "fulfilled";
+
+  const [res1, res2] = results.filter(isFulfilled);
+  let articles = res1.value.articles;
+  articles = articles?.concat(
+    res2.value.response.docs.map((el) => ({
+      source: {
+        id: "",
+        name: el.source,
+      },
+      author: el.byline.original,
+      title: el.abstract,
+      description: el.lead_paragraph,
+      url: el.web_url,
+      urlToImage: el.multimedia[0]?.url,
+      publishedAt: el.pub_date,
+      content: "",
+      category: "",
+    }))
+  );
 
   const dateParam = searchParams.get("date");
   const sourceParam = searchParams.get("source");

@@ -29,7 +29,7 @@ const ArticleItem = ({ article }: IProps) => {
         <p>{timeSince(article.publishedAt)}</p>
         <div className="description">
           <div className="title">{article.title}</div>
-          <p>{`${article.source.name} - ${article.author}`}</p>
+          <p>{`By - ${article.author}`}</p>
         </div>
       </div>
     </Link>

@@ -13,13 +13,27 @@ export type Article = {
   category: string;
 };
 
-export type SearchParams = {
-  q: string;
+export type NewYorkTimesArticle = {
+  abstract: string;
+  byline: {
+    original: string;
+  };
+  pub_date: string;
+  source: string;
+  web_url: string;
+  lead_paragraph: string;
+  multimedia: Array<{
+    url: string;
+  }>;
 };
 
-export type Response = {
+export type BaseResponse = {
   status: string;
-  totalResults: number;
   articles: Article[];
+  totalResults: number;
   error?: string;
+  copyright: string;
+  response: {
+    docs: NewYorkTimesArticle[];
+  };
 };
