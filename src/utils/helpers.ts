@@ -41,3 +41,5 @@ export const getPastDate = (past: string) => {
   dateMap[past]();
   return currentDate;
 };
+
+export const getInitial = (name: string) => name.split("")[0];

@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { Article } from "../../types/entities";
-import { timeSince } from "../../utils/helpers";
+import { getInitial, timeSince } from "../../utils/helpers";
 import "./articleItem.css";
 
 type IProps = {
@@ -11,7 +11,7 @@ const ArticleItem = ({ article }: IProps) => {
   return (
     <Link to={article.url} target="_blank" className="item-wrapper">
       <div className="article-header ">
-        <div className="source-icon">M</div>
+        <div className="source-icon">{getInitial(article.source.name)}</div>
         <div>{article.source.name}</div>
       </div>
       <div

@@ -9,6 +9,7 @@
   color: var(--main-bg-color);
   font-size: 24px;
   font-weight: bold;
+  text-transform: uppercase;
 }
 
 .item-wrapper {
