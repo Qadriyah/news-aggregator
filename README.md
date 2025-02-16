@@ -6,8 +6,8 @@ News aggregator website that pulls articles from different sources and displays 
 
 - [Tools](#tools)
 - [Setup](#setup)
-- [Running tests](#running-tests)
 - [Starting local development server](#starting-local-development-server)
+- [Running tests](#running-tests)
 
 ## Tools
 
@@ -31,15 +31,7 @@ cd news-aggregator
 
 ### Set environment variables
 
-Be sure to set the environment variables shown in the `.env.example` file
-
-## Running tests
-
-```
-npm run cy:open
-```
-
-This command will open a cypress app in a test runner
+Create a `.env` file and set the environment variables shown in the `.env.example` file
 
 ## Starting local development server
 
@@ -67,7 +59,7 @@ npm install --force
 
 This will install all the dependencies defined in the `package.json` file inside the news-aggregator folder.
 
-#### To start the development serer
+#### To start the development serer run:
 
 ```
 npm start
@@ -78,3 +70,11 @@ After starting the local development server, the application can be accessed at:
 ```
 http://localhost:3000
 ```
+
+## Running tests
+
+```
+npm run cy:open
+```
+
+This command will open a cypress app in a test runner
