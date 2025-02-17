@@ -8,5 +8,11 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"]
   },
   "include": ["src/**/*"],
-  "exclude": ["**/*.spec.tsx", "**/*.test.tsx", "node_modules", "build"]
+  "exclude": [
+    "**/*.spec.tsx",
+    "**/*.test.tsx",
+    "node_modules",
+    "build",
+    "cypress"
+  ]
 }
