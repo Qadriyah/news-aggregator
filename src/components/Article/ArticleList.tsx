@@ -17,24 +17,27 @@ const ArticleList = ({ resPromise }: IProps) => {
     input: PromiseSettledResult<T>
   ): input is PromiseFulfilledResult<T> => input.status === "fulfilled";
 
-  const [res1, res2] = results.filter(isFulfilled);
-  let articles = res1.value.articles;
-  articles = articles?.concat(
-    res2.value.response.docs.map((el) => ({
-      source: {
-        id: "",
-        name: el.source,
-      },
-      author: el.byline.original,
-      title: el.abstract,
-      description: el.lead_paragraph,
-      url: el.web_url,
-      urlToImage: el.multimedia[0]?.url,
-      publishedAt: el.pub_date,
-      content: "",
-      category: "",
-    }))
-  );
+  const articles = React.useMemo(() => {
+    const [res1, res2] = results.filter(isFulfilled);
+    let articles = res1.value.articles;
+    articles = articles?.concat(
+      res2.value.response.docs.map((el) => ({
+        source: {
+          id: "",
+          name: el.source,
+        },
+        author: el.byline.original,
+        title: el.abstract,
+        description: el.lead_paragraph,
+        url: el.web_url,
+        urlToImage: el.multimedia[0]?.url,
+        publishedAt: el.pub_date,
+        content: "",
+        category: "",
+      }))
+    );
+    return articles;
+  }, [results]);
 
   const filterParams: Record<string, string> = React.useMemo(
     () => ({
