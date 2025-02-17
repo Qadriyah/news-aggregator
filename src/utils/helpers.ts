@@ -14,7 +14,7 @@ export const timeSince = (date: string) => {
     seconds: 1,
   };
   const secondsElapsed = (new Date(date).getTime() - Date.now()) / 1000;
-  for (let key in ranges) {
+  for (const key in ranges) {
     if (ranges[key] < Math.abs(secondsElapsed)) {
       const delta = secondsElapsed / ranges[key];
       return formatter.format(
